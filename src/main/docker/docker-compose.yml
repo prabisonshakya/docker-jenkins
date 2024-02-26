@@ -3,5 +3,7 @@ services:
   web:
     image: 'java-sample-webapp'
     build: .
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
     ports:
       - "8181:8080"
