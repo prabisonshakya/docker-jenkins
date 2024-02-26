@@ -7,7 +7,7 @@
 
     <display-name>Docker Java Sample Webapp</display-name>
     <description>
-        A simple webapp for docker testing purpose
+        A simple webapp for docker test
     </description>
 
     <servlet>
