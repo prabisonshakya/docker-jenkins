@@ -11,6 +11,18 @@ pipeline {
             }
         }
 
+        stage('SonarQube Analysis') {
+            steps {
+                script {
+                    // Perform SonarQube analysis using Maven
+                    def mvn = tool 'Default Maven';
+                    withSonarQubeEnv() {
+                        sh "${mvn}/bin/mvn clean verify sonar:sonar -Dsonar.projectKey=jenkins"
+                    }
+                }
+            }
+        }
+
         stage('Copy to Docker Directory') {
             steps {
                 script {
