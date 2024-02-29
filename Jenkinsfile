@@ -11,8 +11,9 @@ pipeline {
         stage('Build and Package') {
             steps {
                 script {
-                    // Maven clean install
-                    sh 'mvn clean install'
+                    // Use Default Maven tool
+                    def mvnHome = tool 'Default Maven'
+                    sh "${mvnHome}/bin/mvn clean install"
                 }
             }
         }
@@ -39,7 +40,7 @@ pipeline {
             steps {
                 script {
                     // Tag the Docker image
-                    sh 'docker tag tomcat:v1 10.120.2.223:5000/tomcat:v1'
+                    sh 'docker tag tomcat:v1 10.120.2.221:5000/tomcat:v1'
                 }
             }
         }
@@ -48,7 +49,7 @@ pipeline {
             steps {
                 script {
                     // Push the Docker image to the registry
-                    sh 'docker push 10.120.2.223:5000/tomcat:v1'
+                    sh 'docker push 10.120.2.221:5000/tomcat:v1'
                 }
             }
         }
@@ -56,10 +57,10 @@ pipeline {
         stage('SonarQube Analysis') {
             steps {
                 script {
-                    // Perform SonarQube analysis using Maven
-                    def mvn = tool 'Default Maven';
+                    // Use Default Maven tool for SonarQube analysis
+                    def mvnHome = tool 'Default Maven'
                     withSonarQubeEnv() {
-                        sh "${mvn}/bin/mvn clean verify sonar:sonar -Dsonar.projectKey=jenkins"
+                        sh "${mvnHome}/bin/mvn clean verify sonar:sonar -Dsonar.projectKey=jenkins"
                     }
                 }
             }
