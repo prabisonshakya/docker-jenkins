@@ -11,9 +11,8 @@ pipeline {
         stage('Build and Package') {
             steps {
                 script {
-                    // Use Default Maven tool
-                    def mvnHome = tool 'Default Maven'
-                    sh "${mvnHome}/bin/mvn clean install"
+                    // Maven clean install
+                    sh 'mvn clean install'
                 }
             }
         }
@@ -57,10 +56,10 @@ pipeline {
         stage('SonarQube Analysis') {
             steps {
                 script {
-                    // Use Default Maven tool for SonarQube analysis
-                    def mvnHome = tool 'Default Maven'
+                    // Perform SonarQube analysis using Maven
+                    def mvn = tool 'Default Maven';
                     withSonarQubeEnv() {
-                        sh "${mvnHome}/bin/mvn clean verify sonar:sonar -Dsonar.projectKey=jenkins"
+                        sh "${mvn}/bin/mvn clean verify sonar:sonar -Dsonar.projectKey=jenkins"
                     }
                 }
             }
