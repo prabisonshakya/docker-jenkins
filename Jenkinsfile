@@ -2,23 +2,17 @@ pipeline {
     agent any
 
     stages {
+        stage('SCM') {
+            steps {
+                checkout scm
+            }
+        }
+
         stage('Build and Package') {
             steps {
                 script {
                     // Maven clean install
                     sh 'mvn clean install'
-                }
-            }
-        }
-
-        stage('SonarQube Analysis') {
-            steps {
-                script {
-                    // Perform SonarQube analysis using Maven
-                    def mvn = tool 'Default Maven';
-                    withSonarQubeEnv() {
-                        sh "${mvn}/bin/mvn clean verify sonar:sonar -Dsonar.projectKey=jenkins"
-                    }
                 }
             }
         }
@@ -55,6 +49,18 @@ pipeline {
                 script {
                     // Push the Docker image to the registry
                     sh 'docker push 10.120.2.221:5000/tomcat:v1'
+                }
+            }
+        }
+
+        stage('SonarQube Analysis') {
+            steps {
+                script {
+                    // Perform SonarQube analysis using Maven
+                    def mvn = tool 'Default Maven';
+                    withSonarQubeEnv() {
+                        sh "${mvn}/bin/mvn clean verify sonar:sonar -Dsonar.projectKey=jenkins"
+                    }
                 }
             }
         }
