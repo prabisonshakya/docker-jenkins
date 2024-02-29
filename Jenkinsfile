@@ -39,7 +39,7 @@ pipeline {
             steps {
                 script {
                     // Tag the Docker image
-                    sh 'docker tag tomcat:v1 10.120.2.221:5000/tomcat:v1'
+                    sh 'docker tag tomcat:v1 10.120.2.223:5000/tomcat:v1'
                 }
             }
         }
@@ -48,7 +48,7 @@ pipeline {
             steps {
                 script {
                     // Push the Docker image to the registry
-                    sh 'docker push 10.120.2.221:5000/tomcat:v1'
+                    sh 'docker push 10.120.2.223:5000/tomcat:v1'
                 }
             }
         }
