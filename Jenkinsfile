@@ -47,15 +47,6 @@ pipeline {
             }
         }
 
-        stage('Tag Docker Image') {
-            steps {
-                script {
-                    // Tag the Docker image
-                    sh 'docker tag tomcat:v1 10.120.2.223:5000/tomcat:v1'
-                }
-            }
-        }
-
         stage('Push Docker Image') {
             steps {
                 script {
