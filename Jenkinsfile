@@ -60,7 +60,7 @@ pipeline {
             steps {
                 script {
                     // SSH into the test server and pull the Docker image
-                    sh 'ssh jenkins@10.120.2.228 "docker pull 10.120.2.228:5000/tomcat:v1"'
+                    sh 'ssh jenkins "docker pull 10.120.2.228:5000/tomcat:v1"'
                 }
             }
         }
@@ -69,7 +69,7 @@ pipeline {
             steps {
                 script {
                     // SSH into the test server and execute pre-query
-                    sh 'ssh test@102.0.2.2 "echo \'PRE-QUERY\' > prequery.sql && mysql -uroot -proot < prequery.sql"'
+                    sh 'ssh jenkins "mysql -uroot -proot < prequery.sql"'
                 }
             }
         }
@@ -78,7 +78,7 @@ pipeline {
             steps {
                 script {
                     // SSH into the test server and run Docker Compose
-                    sh 'ssh test@102.0.2.2 "docker-compose up -d"'
+                    sh 'ssh jenkins "git clone https://github.com/prabisonshakya/docker-jenkins/blob/main/src/main/docker/docker-compose.yml && docker-compose up -d"'
                 }
             }
         }
@@ -87,7 +87,7 @@ pipeline {
             steps {
                 script {
                     // SSH into the test server and execute post-query
-                    sh 'ssh test@102.0.2.2 "echo \'POST-QUERY\' > postquery.sql && mysql -uroot -proot < postquery.sql"'
+                    sh 'ssh jenkins "mysql -uroot -proot < postquery.sql"'
                 }
             }
         }
