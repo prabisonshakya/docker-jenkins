@@ -69,7 +69,7 @@ pipeline {
             steps {
                 script {
                     // SSH into the test server and execute pre-query
-                    sh 'ssh jenkins "mysql -uroot -proot < prequery.sql"'
+                    sh 'ssh jenkins "git clone https://github.com/prabisonshakya/docker-jenkins/blob/main/resources/prequery.sql && mysql -uroot -proot < prequery.sql"'
                 }
             }
         }
