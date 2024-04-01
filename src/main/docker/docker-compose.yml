@@ -1,7 +1,7 @@
 version: '2'
 services:
   web:
-    image: 'java-sample-webapp'
+    image: '10.120.2.228:5000/tomcat:v1'
     build: .
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
