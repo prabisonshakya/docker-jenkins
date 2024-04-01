@@ -69,7 +69,7 @@ pipeline {
             steps {
                 script {
                     // SSH into the test server and execute pre-query
-                    sh 'ssh jenkins "git clone https://github.com/prabisonshakya/docker-jenkins/blob/main/resources/prequery.sql && mysql -uroot -proot < prequery.sql"'
+                    sh 'ssh jenkins "wget https://github.com/prabisonshakya/docker-jenkins/blob/main/resources/prequery.sql && mysql -uroot -proot < prequery.sql"'
                 }
             }
         }
@@ -78,7 +78,7 @@ pipeline {
             steps {
                 script {
                     // SSH into the test server and run Docker Compose
-                    sh 'ssh jenkins "git clone https://github.com/prabisonshakya/docker-jenkins/blob/main/src/main/docker/docker-compose.yml && docker-compose up -d"'
+                    sh 'ssh jenkins "wget https://github.com/prabisonshakya/docker-jenkins/blob/main/src/main/docker/docker-compose.yml && docker-compose up -d"'
                 }
             }
         }
