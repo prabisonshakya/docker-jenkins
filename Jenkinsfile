@@ -60,7 +60,7 @@ pipeline {
             steps {
                 script {
                     // SSH into the test server and pull the Docker image
-                    sh 'ssh jenkins "docker pull 10.120.2.228:5000/tomcat:v1"'
+                    sh 'ssh jenkins@10.120.2.228 "docker pull 10.120.2.228:5000/tomcat:v1"'
                 }
             }
         }
