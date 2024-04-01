@@ -42,7 +42,7 @@ pipeline {
             steps {
                 script {
                     // Change to the Docker directory and build the Docker image
-                    sh 'cd /var/lib/jenkins/workspace/docker-jenkins/src/main/docker/ && docker build -t tomcat:v1 .'
+                    sh 'cd /var/lib/jenkins/workspace/docker-jenkins/src/main/docker/ && docker build -t 10.120.2.228:5000/tomcat:v1 .'
                 }
             }
         }
